@@ -13,12 +13,9 @@
           "EMAIL"
         ],
         "passwordProtectionSettings": {
-          "passwordPolicyMinLength": 8,
+          "passwordPolicyMinLength": 6,
           "passwordPolicyCharacters": [
-            "REQUIRES_LOWERCASE",
-            "REQUIRES_NUMBERS",
-            "REQUIRES_SYMBOLS",
-            "REQUIRES_UPPERCASE"
+            "REQUIRES_NUMBERS"
           ]
         },
         "mfaConfiguration": "OFF",
@@ -28,6 +25,24 @@
         "verificationMechanisms": [
           "EMAIL"
         ]
+      }
+    }
+  },
+  "api": {
+    "notesapp": {
+      "service": "AppSync",
+      "providerPlugin": "awscloudformation",
+      "output": {
+        "authConfig": {
+          "defaultAuthentication": {
+            "authenticationType": "API_KEY",
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 7,
+              "description": "demo"
+            }
+          },
+          "additionalAuthenticationProviders": []
+        }
       }
     }
   }
