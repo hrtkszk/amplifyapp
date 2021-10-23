@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import { API, Storage  } from 'aws-amplify';
-import { AmplifySignOut, withAuthenticator } from '@aws-amplify/ui-react';
+import { AmplifyAuthenticator, AmplifySignOut, AmplifySignUp } from '@aws-amplify/ui-react';
 import { listNotes } from './graphql/queries';
 import { createNote as createNoteMutation, deleteNote as deleteNoteMutation } from './graphql/mutations';
 
@@ -55,6 +55,21 @@ function App() {
 
   return (
     <div className="App">
+      <AmplifyAuthenticator>
+      <AmplifySignUp
+       slot="sign-up"
+       usernameAlias="email"
+       formFields={[
+         {
+           type: "email",
+           required: true,
+         },
+         {
+           type: "password",
+           required: false,
+         },
+       ]} 
+      />
       <h1>My Notes App</h1>
       <input
         onChange={e => setFormData({ ...formData, 'name': e.target.value})}
@@ -86,8 +101,9 @@ function App() {
         }
       </div>
       <AmplifySignOut />
+      </AmplifyAuthenticator>
     </div>
   );
 }
 
-export default withAuthenticator(App);
+export default App;
